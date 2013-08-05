@@ -1,4 +1,4 @@
-pre-test
-========
 
-A simple TDD project to be developed and sent to recrutement-dev[at]priceminister.com when completed
+Show us how you code!
+
+Hope to see you soon in a job interview :)
