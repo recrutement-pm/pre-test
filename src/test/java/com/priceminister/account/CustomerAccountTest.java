@@ -15,7 +15,7 @@ import com.priceminister.account.implementation.*;
  * 
  * We want to see how you "think code", and how you organize and structure a simple application.
  * 
- * When you are done, please zip the code and send it to recrutement-dev@priceminister.com
+ * When you are done, please zip the whole project (incl. source-code) and send it to recrutement-dev@priceminister.com
  * 
  */
 public class CustomerAccountTest {
