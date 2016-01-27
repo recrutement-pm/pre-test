@@ -36,7 +36,9 @@ public class CustomerAccountTest {
      */
     @Test
     public void testAccountWithoutMoneyHasZeroBalance() {
-        fail("not yet implemented");
+        Double balance = customerAccount.getBalance();
+        Assert.assertEquals(0.0,balance);
+        Assert.assertNotNull(balance);
     }
     
     /**
@@ -44,7 +46,10 @@ public class CustomerAccountTest {
      */
     @Test
     public void testAddPositiveAmount() {
-        fail("not yet implemented");
+        Double formerAccount = customerAccount.getBalance();
+        Double addAmount = 50.0;
+        account.add(addAmount);
+        Assert.assertEquals(formerAccount+addAmount,account.getBalance());
     }
     
     /**
@@ -53,7 +58,9 @@ public class CustomerAccountTest {
      */
     @Test
     public void testWithdrawAndReportBalanceIllegalBalance() {
-        fail("not yet implemented");
+        customerAccount.add(50.0);
+        customerAccount.withdrawAndReportBalance(70.0,rule);
+        fail("IllegalBalanceException");
     }
     
     // Also implement missing unit tests for the above functionalities.
