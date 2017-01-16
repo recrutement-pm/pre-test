@@ -10,7 +10,7 @@ import com.priceminister.account.implementation.*;
 
 /**
  * Please create the business code, starting from the unit tests below.
- * Implement the first test, the develop the code that makes it pass.
+ * Implement the first test, then develop the code that makes it pass.
  * Then focus on the second test, and so on.
  * 
  * We want to see how you "think code", and how you organize and structure a simple application.
