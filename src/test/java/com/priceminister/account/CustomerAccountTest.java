@@ -36,7 +36,9 @@ public class CustomerAccountTest {
      */
     @Test
     public void testAccountWithoutMoneyHasZeroBalance() {
-        fail("not yet implemented");
+        Double balance=customerAccount.getBalance();
+        Assert.assertEquals(0.0, emptyAccount);
+        Assert.assertNotNull(emptyAccount);
     }
     
     /**
@@ -44,7 +46,8 @@ public class CustomerAccountTest {
      */
     @Test
     public void testAddPositiveAmount() {
-        fail("not yet implemented");
+        customerAccount.add(10);
+        Assert.assertEquals(10.0, customerAccount.getBalance();
     }
     
     /**
@@ -53,9 +56,37 @@ public class CustomerAccountTest {
      */
     @Test
     public void testWithdrawAndReportBalanceIllegalBalance() {
-        fail("not yet implemented");
+        try {
+            rule = new AccountRule();
+            customerAccount.add(10);
+            Double finalBalance = customerAccount.withdrawAndReportBalance(15.0, rule);
+        } catch (final IllegalBalanceException e) {
+            Assert.assertEquals("Illegal account balance: " + finalBalance, e.toString());
+        }
     }
     
     // Also implement missing unit tests for the above functionalities.
-
+    
+    /**
+     * Tests that a new account with money has a balance with the right initial amount
+     */
+    @Test
+    public void testAccountWithoutMoneyHasZeroBalance() {
+        CustomerAccount customerAccountWithMoney = new CustomerAccount(10.0);
+        Double balance=customerAccount.getBalance();
+        Assert.assertEquals(10.0, balance);
+    }
+    
+    /**
+     * Tests that a legal withdrawal gives the right balance
+     */
+    @Test
+    public void testWithdrawAndReportBalanceLegalBalance() {
+        try {
+            customerAccount.add(20);
+            rule = new AccountRule();
+            Double finalBalance = customerAccount.withdrawAndReportBalance(15.0, rule);
+            Assert.assertEquals(5.0, finalBalance);
+        } catch (final IllegalBalanceException e) {}
+    }
 }
