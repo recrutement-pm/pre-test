@@ -8,6 +8,8 @@ public class IllegalBalanceException extends Exception {
 	private Double balance;
     
     public IllegalBalanceException(Double illegalBalance) {
+
+        super("Illegal account balance: " + illegalBalance);
         balance = illegalBalance;
     }
     

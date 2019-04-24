@@ -90,11 +90,10 @@ public class CustomerAccountTest {
      * Use the logic contained in CustomerAccountRule; feel free to refactor the existing code.
      */
     @Test
-    public void testWithdrawAndReportBalanceIllegalBalanceWhenZero() throws IllegalBalanceException {
-        exceptionRule.expect(IllegalBalanceException.class);
-        exceptionRule.expectMessage("Illegal account balance: 0.0");
-
-        customerAccount.withdrawAndReportBalance(0.0, rule );
+    public void testWithdrawAndReportBalancelegalBalanceWhenZero() throws IllegalBalanceException, IllegalAmountException {
+        customerAccount.add(60.0);
+        Double balance = customerAccount.withdrawAndReportBalance(60.0, rule);
+        assertEquals(new Double(0),  balance);
 
     }
 
@@ -102,7 +101,7 @@ public class CustomerAccountTest {
     public void testWithdrawAndReportBalance() throws IllegalBalanceException, IllegalAmountException {
         customerAccount.add(60.0);
         Double balance = customerAccount.withdrawAndReportBalance(50.0, rule);
-        assertEquals(new Double(100),  balance);
+        assertEquals(new Double(10),  balance);
     }
 
 
