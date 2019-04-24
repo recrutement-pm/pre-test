@@ -10,7 +10,7 @@ public interface Account {
      * Adds money to this account.
      * @param addedAmount - the money to add
      */
-    public void add(Double addedAmount);
+    public void add(Double addedAmount) throws IllegalAmountException;
     
     /**
      * Withdraws money from the account.

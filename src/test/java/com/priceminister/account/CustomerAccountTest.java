@@ -2,10 +2,10 @@ package com.priceminister.account;
 
 
 import static org.junit.Assert.*;
-
 import org.junit.*;
 
 import com.priceminister.account.implementation.*;
+import org.junit.rules.ExpectedException;
 
 
 /**
@@ -21,8 +21,10 @@ import com.priceminister.account.implementation.*;
 public class CustomerAccountTest {
     
     Account customerAccount;
-    AccountRule rule;
+    AccountRule rule = new CustomerAccountRule();
 
+    @Rule
+    public ExpectedException exceptionRule = ExpectedException.none();
     /**
      * @throws java.lang.Exception
      */
@@ -36,15 +38,38 @@ public class CustomerAccountTest {
      */
     @Test
     public void testAccountWithoutMoneyHasZeroBalance() {
-        fail("not yet implemented");
+
+        assertEquals(new Double(0) , customerAccount.getBalance() );
+
     }
     
     /**
      * Adds money to the account and checks that the new balance is as expected.
      */
     @Test
-    public void testAddPositiveAmount() {
-        fail("not yet implemented");
+    public void testAddPositiveAmount() throws IllegalAmountException {
+        customerAccount.add(100.0);
+        assertEquals(new Double(100) , customerAccount.getBalance() );
+    }
+
+    /**
+     * Tests that adding negative amount throws the expected exception.
+     */
+    @Test
+    public void testAddNegativeAmountIllegalAmount() throws IllegalAmountException {
+        exceptionRule.expect(IllegalAmountException.class);
+        exceptionRule.expectMessage("Illegal amount: -50.0");
+        customerAccount.add(-50.0);
+    }
+
+    /**
+     * Tests that adding null amount throws the expected exception.
+     */
+    @Test
+    public void testAddNullAmountIllegalAmount() throws IllegalAmountException {
+        exceptionRule.expect(IllegalAmountException.class);
+        exceptionRule.expectMessage("Illegal amount: null");
+        customerAccount.add(null);
     }
     
     /**
@@ -52,10 +77,34 @@ public class CustomerAccountTest {
      * Use the logic contained in CustomerAccountRule; feel free to refactor the existing code.
      */
     @Test
-    public void testWithdrawAndReportBalanceIllegalBalance() {
-        fail("not yet implemented");
+    public void testWithdrawAndReportBalanceIllegalBalance() throws IllegalBalanceException {
+        exceptionRule.expect(IllegalBalanceException.class);
+        exceptionRule.expectMessage("Illegal account balance: -50.0");
+
+        customerAccount.withdrawAndReportBalance(50.0, rule );
+
     }
-    
-    // Also implement missing unit tests for the above functionalities.
+
+    /**
+     * Tests that an illegal withdrawal throws the expected exception.
+     * Use the logic contained in CustomerAccountRule; feel free to refactor the existing code.
+     */
+    @Test
+    public void testWithdrawAndReportBalanceIllegalBalanceWhenZero() throws IllegalBalanceException {
+        exceptionRule.expect(IllegalBalanceException.class);
+        exceptionRule.expectMessage("Illegal account balance: 0.0");
+
+        customerAccount.withdrawAndReportBalance(0.0, rule );
+
+    }
+
+    @Test
+    public void testWithdrawAndReportBalance() throws IllegalBalanceException, IllegalAmountException {
+        customerAccount.add(60.0);
+        Double balance = customerAccount.withdrawAndReportBalance(50.0, rule);
+        assertEquals(new Double(100),  balance);
+    }
+
+
 
 }
