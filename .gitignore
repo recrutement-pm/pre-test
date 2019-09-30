@@ -2,5 +2,8 @@
 .settings
 .project
 target/
+
+
+##Intellij IDEA##
 .idea/
 *.iml
