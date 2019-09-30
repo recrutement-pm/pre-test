@@ -23,12 +23,15 @@ public class CustomerAccountTest {
     Account customerAccount;
     AccountRule rule;
 
+
     /**
      * @throws java.lang.Exception
      */
     @Before
     public void setUp() throws Exception {
         customerAccount = new CustomerAccount();
+        rule = new CustomerAccountRule();
+        CustomerAccount.balance = 0.0;
     }
     
     /**
@@ -36,7 +39,8 @@ public class CustomerAccountTest {
      */
     @Test
     public void testAccountWithoutMoneyHasZeroBalance() {
-        fail("not yet implemented");
+        Assert.assertNotNull(customerAccount.getBalance());
+        Assert.assertEquals(new Double(0),customerAccount.getBalance());
     }
     
     /**
@@ -44,18 +48,39 @@ public class CustomerAccountTest {
      */
     @Test
     public void testAddPositiveAmount() {
-        fail("not yet implemented");
+        Double balance = customerAccount.getBalance();
+        //check before
+        Assert.assertNotNull(balance);
+        //add 10 to balance
+        customerAccount.add(10.0);
+        //check after
+        Assert.assertEquals(Double.valueOf(10.0), customerAccount.getBalance());
     }
     
     /**
      * Tests that an illegal withdrawal throws the expected exception.
-     * Use the logic contained in CustomerAccountRule; feel free to refactor the existing code.
      */
     @Test
     public void testWithdrawAndReportBalanceIllegalBalance() {
-        fail("not yet implemented");
+        try {
+            customerAccount.withdrawAndReportBalance(Double.valueOf(20), rule);
+            fail();
+        } catch (IllegalBalanceException e) {
+            assertEquals("Illegal account balance: -20.0", e.toString());
+        }
     }
-    
-    // Also implement missing unit tests for the above functionalities.
 
+    /**
+     * Tests that withdrawal change the balance.
+     */
+    @Test
+    public void testWithdrawOk() throws Exception{
+        Double balance = customerAccount.getBalance();
+        //check before
+        Assert.assertNotNull(balance);
+        //add 10 to balance
+        customerAccount.add(10.0);
+        Double newBalance = customerAccount.withdrawAndReportBalance(Double.valueOf(5), rule);
+        assertEquals(customerAccount.getBalance(), newBalance);
+    }
 }
