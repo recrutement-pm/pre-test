@@ -1,10 +1,10 @@
-package com.priceminister.account;
+package com.priceminister.account.abstraction;
 
 /**
  * Checks if the requested operation is permitted.
  */
 public interface AccountRule {
-    
+
     /**
      * Checks if the resulting account balance after a withdrawal is OK
      * for the specific type of account.
