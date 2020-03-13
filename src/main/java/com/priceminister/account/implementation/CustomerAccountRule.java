@@ -14,13 +14,13 @@
  */
 package com.priceminister.account.implementation;
 
-import com.priceminister.account.*;
+import com.priceminister.account.abstraction.AccountRule;
 
 
 public class CustomerAccountRule implements AccountRule {
 
     /* (non-Javadoc)
-     * @see com.priceminister.account.AccountRule#withdrawPermitted(java.lang.Double)
+     * @see com.priceminister.account.abstraction.AccountRule#withdrawPermitted(java.lang.Double)
      */
     public boolean withdrawPermitted(Double resultingAccountBalance) {
         return resultingAccountBalance >= 0;
