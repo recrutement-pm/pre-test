@@ -1,5 +1,7 @@
 package com.priceminister.account;
 
+import com.priceminister.account.exception.IllegalBalanceException;
+
 /**
  * This class represents a simple account.
  * It doesn't handle different currencies, all money is supposed to be of standard currency EUR.
