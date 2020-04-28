@@ -38,4 +38,34 @@
   	Please start by implementing the unit tests and the underlying application code:
 	/pretest-tdd/src/test/java/com/priceminister/account/CustomerAccountTest.java
 </description>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+						<finalName>manageAccounts</finalName>
+							<archive>
+								<manifest>
+									<mainClass>
+										com.priceminister.account.AccountApplication
+									</mainClass>
+								</manifest>
+							</archive>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
