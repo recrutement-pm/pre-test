@@ -3,6 +3,7 @@ package com.priceminister.account;
 /**
  * Checks if the requested operation is permitted.
  */
+@FunctionalInterface
 public interface AccountRule {
     
     /**

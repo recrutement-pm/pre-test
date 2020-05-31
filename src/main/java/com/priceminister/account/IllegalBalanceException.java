@@ -10,7 +10,8 @@ public class IllegalBalanceException extends Exception {
     public IllegalBalanceException(Double illegalBalance) {
         balance = illegalBalance;
     }
-    
+
+    @Override
     public String toString() {
         return "Illegal account balance: " + balance;
     }

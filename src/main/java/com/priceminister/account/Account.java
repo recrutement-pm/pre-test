@@ -10,7 +10,7 @@ public interface Account {
      * Adds money to this account.
      * @param addedAmount - the money to add
      */
-    public void add(Double addedAmount);
+    void add(Double addedAmount) throws AccountOperationConfigException;
     
     /**
      * Withdraws money from the account.
@@ -19,11 +19,11 @@ public interface Account {
      * @return the remaining account balance
      * @throws IllegalBalanceException if the withdrawal leaves the account with a forbidden balance
      */
-    public Double withdrawAndReportBalance(Double withdrawnAmount, AccountRule rule) throws IllegalBalanceException;
+    Double withdrawAndReportBalance(Double withdrawnAmount, AccountRule rule) throws IllegalBalanceException, AccountOperationConfigException;
     
     /**
      * Gets the current account balance.
      * @return the account's balance
      */
-    public Double getBalance();
+    Double getBalance();
 }
