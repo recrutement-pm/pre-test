@@ -29,14 +29,16 @@ public class CustomerAccountTest {
     @Before
     public void setUp() throws Exception {
         customerAccount = new CustomerAccount();
+        rule = new CustomerAccountRule();
     }
     
     /**
      * Tests that an empty account always has a balance of 0.0, not a NULL.
      */
     @Test
-    public void testAccountWithoutMoneyHasZeroBalance() {
-        fail("not yet implemented");
+    public void testAccountWithoutMoneyHasZeroBalance() throws IllegalBalanceException {
+        Double result = customerAccount.getBalance();
+        Assert.assertNull(result);
     }
     
     /**
@@ -44,6 +46,7 @@ public class CustomerAccountTest {
      */
     @Test
     public void testAddPositiveAmount() {
+
         fail("not yet implemented");
     }
     
