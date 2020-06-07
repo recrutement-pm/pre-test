@@ -12,14 +12,13 @@ import com.priceminister.account.implementation.*;
  * Please create the business code, starting from the unit tests below.
  * Implement the first test, the develop the code that makes it pass.
  * Then focus on the second test, and so on.
- * 
+ * <p>
  * We want to see how you "think code", and how you organize and structure a simple application.
- * 
+ * <p>
  * When you are done, please zip the whole project (incl. source-code) and send it to recrutement-dev@priceminister.com
- * 
  */
 public class CustomerAccountTest {
-    
+
     Account customerAccount;
     AccountRule rule;
 
@@ -31,7 +30,7 @@ public class CustomerAccountTest {
         customerAccount = new CustomerAccount();
         rule = new CustomerAccountRule();
     }
-    
+
     /**
      * Tests that an empty account always has a balance of 0.0, not a NULL.
      */
@@ -46,7 +45,7 @@ public class CustomerAccountTest {
         // assert
         Assert.assertEquals(result, expectedResult);
     }
-    
+
     /**
      * Adds money to the account and checks that the new balance is as expected.
      */
@@ -63,16 +62,32 @@ public class CustomerAccountTest {
         // assert
         Assert.assertEquals(expectedResult, customerAccount.getBalance());
     }
-    
+
+    @Test
+    public void addNegativeNumberWillNotChangeBalance() {
+        // arrange
+        Double oldBalance = customerAccount.getBalance();
+        Double negativeAmount = -10.0d;
+        Double expectedResult = oldBalance;
+
+        // act
+        customerAccount.add(negativeAmount);
+
+        // assert
+        Assert.assertEquals(expectedResult, customerAccount.getBalance());
+
+    }
+
     /**
      * Tests that an illegal withdrawal throws the expected exception.
      * Use the logic contained in CustomerAccountRule; feel free to refactor the existing code.
      */
     @Test
     public void testWithdrawAndReportBalanceIllegalBalance() {
+
         fail("not yet implemented");
     }
-    
+
     // Also implement missing unit tests for the above functionalities.
 
 }

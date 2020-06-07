@@ -11,7 +11,7 @@ public class CustomerAccount implements Account {
     }
 
     public void add(Double addedAmount) {
-        // TODO Auto-generated method stub
+        currentBalance += addedAmount;
     }
 
     public Double getBalance() {
