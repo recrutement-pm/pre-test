@@ -1,14 +1,24 @@
 package com.priceminister.account.implementation;
 
-import com.priceminister.account.*;
+import com.priceminister.account.Account;
+import com.priceminister.account.AccountRule;
+import com.priceminister.account.IllegalBalanceException;
+
+import java.util.UUID;
 
 
 public class CustomerAccount implements Account {
 
+    private UUID id;
     private Double currentBalance;
 
     public CustomerAccount() {
         currentBalance = 0.0d;
+        id = UUID.randomUUID();
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     public void add(Double addedAmount) {

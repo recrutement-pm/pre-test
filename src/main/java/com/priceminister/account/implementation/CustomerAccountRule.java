@@ -14,7 +14,7 @@
  */
 package com.priceminister.account.implementation;
 
-import com.priceminister.account.*;
+import com.priceminister.account.AccountRule;
 
 
 public class CustomerAccountRule implements AccountRule {
