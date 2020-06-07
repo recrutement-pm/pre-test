@@ -52,8 +52,16 @@ public class CustomerAccountTest {
      */
     @Test
     public void testAddPositiveAmount() {
+        // arrange
+        Double oldBalance = customerAccount.getBalance();
+        Double addedAmount = 10.0d;
 
-        fail("not yet implemented");
+        // act
+        customerAccount.add(addedAmount);
+        Double expectedResult = oldBalance + addedAmount;
+
+        // assert
+        Assert.assertEquals(expectedResult, customerAccount.getBalance());
     }
     
     /**
