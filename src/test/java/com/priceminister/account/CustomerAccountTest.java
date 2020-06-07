@@ -37,8 +37,14 @@ public class CustomerAccountTest {
      */
     @Test
     public void testAccountWithoutMoneyHasZeroBalance() throws IllegalBalanceException {
+        // arrange
+        Double expectedResult = 0.0d;
+
+        // act
         Double result = customerAccount.getBalance();
-        Assert.assertNull(result);
+
+        // assert
+        Assert.assertEquals(result, expectedResult);
     }
     
     /**
