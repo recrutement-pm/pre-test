@@ -63,6 +63,9 @@ public class CustomerAccountTest {
         Assert.assertEquals(expectedResult, customerAccount.getBalance());
     }
 
+    /**
+     *
+     */
     @Test
     public void addNegativeNumberWillNotChangeBalance() {
         // arrange
@@ -82,10 +85,13 @@ public class CustomerAccountTest {
      * Tests that an illegal withdrawal throws the expected exception.
      * Use the logic contained in CustomerAccountRule; feel free to refactor the existing code.
      */
-    @Test
-    public void testWithdrawAndReportBalanceIllegalBalance() {
+    @Test(expected = IllegalBalanceException.class)
+    public void testWithdrawAndReportBalanceIllegalBalance() throws IllegalBalanceException {
+        // arrange
+        Double withdrawnAmount = 10.0d;
 
-        fail("not yet implemented");
+        // act
+        Double result = customerAccount.withdrawAndReportBalance(withdrawnAmount, rule);
     }
 
     // Also implement missing unit tests for the above functionalities.
