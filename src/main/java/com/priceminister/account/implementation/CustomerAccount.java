@@ -26,7 +26,7 @@ public class CustomerAccount implements Account {
         if (getBalance() <= 0) throw new IllegalBalanceException(getBalance());
 
         Double withdrawResult = getBalance() - withdrawnAmount;
-        if (!rule.withdrawPermitted(withdrawnAmount)) throw new IllegalBalanceException(withdrawResult);
+        if (!rule.withdrawPermitted(withdrawResult)) throw new IllegalBalanceException(withdrawResult);
 
         currentBalance -= withdrawnAmount;
         return getBalance();

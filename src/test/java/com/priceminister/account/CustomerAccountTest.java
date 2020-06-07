@@ -86,7 +86,8 @@ public class CustomerAccountTest {
      * Use the logic contained in CustomerAccountRule; feel free to refactor the existing code.
      */
     @Test(expected = IllegalBalanceException.class)
-    public void testWithdrawAndReportBalanceIllegalBalance() throws IllegalBalanceException {
+    public void testWithdrawAndReportBalanceWillThrowIllegalBalanceIfCurrentBalanceIsZero()
+            throws IllegalBalanceException {
         // arrange
         Double withdrawnAmount = 10.0d;
 
@@ -94,6 +95,32 @@ public class CustomerAccountTest {
         Double result = customerAccount.withdrawAndReportBalance(withdrawnAmount, rule);
     }
 
-    // Also implement missing unit tests for the above functionalities.
+    @Test(expected = IllegalBalanceException.class)
+    public void testWithdrawAndReportBalanceWillThrowIllegalBalanceIfCurrentBalanceLessThenWithdrawnAmount()
+            throws IllegalBalanceException {
+        // arrange
+        Double addedAmount = 9.0d;
+        customerAccount.add(addedAmount);
+        Double withdrawnAmount = 10.0d;
 
+        // act
+        Double result = customerAccount.withdrawAndReportBalance(withdrawnAmount, rule);
+    }
+
+    @Test
+    public void testWithdrawAndReportBalanceWillChangeCurrentBalance()
+            throws IllegalBalanceException {
+        // arrange
+        Double addedAmount = 9.0d;
+        customerAccount.add(addedAmount);
+        Double withdrawnAmount = 8.0d;
+        Double oldBalance = customerAccount.getBalance();
+        Double expectedBalance = oldBalance - withdrawnAmount;
+
+        // act
+        Double result = customerAccount.withdrawAndReportBalance(withdrawnAmount, rule);
+
+        // assert
+        Assert.assertEquals(expectedBalance, result);
+    }
 }
