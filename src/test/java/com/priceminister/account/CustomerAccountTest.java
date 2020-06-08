@@ -7,6 +7,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
+
 
 /**
  * Please create the business code, starting from the unit tests below.
@@ -118,5 +126,18 @@ public class CustomerAccountTest {
 
         // assert
         Assert.assertEquals(expectedBalance, result);
+    }
+
+    @Test
+    public void testWithdrawAmountByMoreThenOneThread() throws IllegalBalanceException, NegativeAmountException, InterruptedException {
+        ThreadPoolExecutor service = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);
+        Double withdrawnAmount = 10.0d;
+        customerAccount.add(100.0d);
+        Double expectedBalance = 80.0d;
+        IntStream.range(0, 2)
+                .forEach(count -> service.submit(() -> customerAccount.withdrawAndReportBalance(withdrawnAmount, rule)));
+        service.awaitTermination(100, TimeUnit.MILLISECONDS);
+
+        Assert.assertEquals(expectedBalance, customerAccount.getBalance());
     }
 }
