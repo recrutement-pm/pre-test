@@ -50,7 +50,7 @@ public class CustomerAccountTest {
      * Adds money to the account and checks that the new balance is as expected.
      */
     @Test
-    public void testAddPositiveAmount() {
+    public void testAddPositiveAmount() throws NegativeAmountException {
         // arrange
         Double oldBalance = customerAccount.getBalance();
         Double addedAmount = 10.0d;
@@ -64,10 +64,10 @@ public class CustomerAccountTest {
     }
 
     /**
-     *
+     * Adds negative amount will throw exception
      */
-    @Test
-    public void addNegativeNumberWillNotChangeBalance() {
+    @Test(expected = NegativeAmountException.class)
+    public void addNegativeNumberWillNotChangeBalance() throws NegativeAmountException {
         // arrange
         Double oldBalance = customerAccount.getBalance();
         Double negativeAmount = -10.0d;
@@ -75,10 +75,6 @@ public class CustomerAccountTest {
 
         // act
         customerAccount.add(negativeAmount);
-
-        // assert
-        Assert.assertEquals(expectedResult, customerAccount.getBalance());
-
     }
 
     /**
@@ -97,7 +93,7 @@ public class CustomerAccountTest {
 
     @Test(expected = IllegalBalanceException.class)
     public void testWithdrawAndReportBalanceWillThrowIllegalBalanceIfCurrentBalanceLessThenWithdrawnAmount()
-            throws IllegalBalanceException {
+            throws IllegalBalanceException, NegativeAmountException {
         // arrange
         Double addedAmount = 9.0d;
         customerAccount.add(addedAmount);
@@ -109,7 +105,7 @@ public class CustomerAccountTest {
 
     @Test
     public void testWithdrawAndReportBalanceWillChangeCurrentBalance()
-            throws IllegalBalanceException {
+            throws IllegalBalanceException, NegativeAmountException {
         // arrange
         Double addedAmount = 9.0d;
         customerAccount.add(addedAmount);
